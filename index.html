@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Heatmaps</title>
+    <link rel="stylesheet" href="static/style.css">
+  </head>
+  <body>
+    <div id="floating-panel">
+      <div class="group">
+          <div class="subject">Radius <span id=radiusNum>21</span></div>
+          <button onclick="changeRadius(true)">Up</button>
+          <button onclick="changeRadius(false)">Down</button>
+      </div>
+      <div class="group">
+          <div class="subject">Intensity <span id=intensityNum>200</span></div>
+          <button onclick="changeIntensity(true)">Up</button>
+          <button onclick="changeIntensity(false)">Down</button>
+      </div>
+      <div class="group">
+          <div class="subject">Opacity <span id=opacityNum>.6</span></div>
+          <button onclick="changeOpacity(true)">Up</button>
+          <button onclick="changeOpacity(false)">Down</button>
+      </div>
+    </div>
+    <h1 style="margin-left:1%;">Welcome to My Heat Map</h1>
+    <div id="map-container">
+      <div id="map"></div>
+      <div id="toggles">
+        <h3>Toggle:</h3>
+        <button id="shops" style="font-size:25px;">Coffee Shops</button>
+        <br>
+        <br>
+        <button id="bike" style="font-size:25px;">Citi Bike Stations</button>
+        <br>
+        <br>
+        <button id="noise" style="font-size:25px;">Noise Complaints: OFF</button>
+      </div>
+    </div>
+    <div id="comments">
+      <h4>Here is the comments area!</h4>
+      <ul>
+        <li>This is cool!</li>
+        <br>
+        <li>Nice map!</li>
+      </ul>
+    </div>
+
+    <script type="text/javascript" src="public/index.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAelUr6kBl9WauSQGBbp2lTeT63DWZT-AA&libraries=visualization&callback=initMap">
+    </script>
+  </body>
+</html>
