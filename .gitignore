@@ -148,3 +148,8 @@ sftp-config.json
 # Visual Studio Code - https://code.visualstudio.com/
 .settings/
 .vscode/
+
+/node_modules
+/public/location.json
+secret.md
+.DS_Store
