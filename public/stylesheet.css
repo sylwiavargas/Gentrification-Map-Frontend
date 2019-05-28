@@ -45,6 +45,7 @@ html, body {
   margin-left: 3%;
 }
 
-#hideMe {
-  display:inline-flex;
+.year-button {
+  font-size:25px;
+  display: none;
 }

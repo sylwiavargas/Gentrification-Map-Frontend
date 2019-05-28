@@ -1,5 +1,5 @@
 const maxI = 10, rad = 10, opac = .6;
-let map, bikeHeatMap, shop2010Heatmap;
+let map, shop2010Heatmap, shop2018Heatmap, noise2010Heatmap, noise2018Heatmap;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -9,13 +9,17 @@ function initMap() {
   });
 }
 
+//////////////////////////////////SHOPS/////////////////////////////////////////
+
 const shopsButton = document.getElementById("shops")
 shopsButton.addEventListener('click', addShopYearButtons)
 
 function addShopYearButtons(event) {
   const shops2010 = document.getElementById("shops-2010")
+  shops2010.dataset.status = "inactive"
   shops2010.addEventListener('click', addShop2010Heatmap);
   const shops2018 = document.getElementById("shops-2018")
+  shops2018.dataset.status = "inactive"
   shops2018.addEventListener('click', addShop2018Heatmap);
 
   if (event.target.innerText === "Pawn/Coffee Shops: OFF") {
@@ -69,14 +73,14 @@ animalp.addEventListener('click', () => {
 ---------------------------------------
 
 function addShop2010Heatmap(event) {
-  if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons") {
+  if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "inactive") {
+    console.log(event.target);
     fetch('static/pawn_coffee2010.json')
     .then(res => res.json())
     .then(result => {
       let locations = result.map((val) => {
         return new google.maps.LatLng(val.Latitude, val.Longitude);
       })
-      console.log("hello");
       shop2010Heatmap = new google.maps.visualization.HeatmapLayer({
         data: locations,
         map: map,
@@ -85,21 +89,49 @@ function addShop2010Heatmap(event) {
         opacity: opac
       })
     })
-    // console.log("hello");
+    event.target.dataset.status = "active"
+  } else if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "active") {
+    shop2010Heatmap = shop2010Heatmap.setMap(null)
+    event.target.dataset.status = "inactive"
   }
 }
 
 function addShop2018Heatmap(event) {
-  console.log(event.target.parentNode)
-  // if (event.target.innerText === "2010" && event.target.parentNode)
+  if (event.target.innerText === "2018" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "inactive") {
+    console.log(event.target);
+    fetch('static/pawn_coffee2018.json')
+    .then(res => res.json())
+    .then(result => {
+      let locations = result.map((val) => {
+        return new google.maps.LatLng(val.Latitude, val.Longitude);
+      })
+      shop2018Heatmap = new google.maps.visualization.HeatmapLayer({
+        data: locations,
+        map: map,
+        maxIntensity: maxI,
+        radius: rad,
+        opacity: opac
+      })
+    })
+    event.target.dataset.status = "active"
+  } else if (event.target.innerText === "2018" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "active") {
+    shop2018Heatmap = shop2018Heatmap.setMap(null)
+    event.target.dataset.status = "inactive"
+  }
 }
+/////////////////////////////////NOISES/////////////////////////////////////////
 
 const noisesButton = document.getElementById("noises")
 noisesButton.addEventListener('click', addNoiseYearButtons)
 
 function addNoiseYearButtons(event) {
   const noises2010 = document.getElementById("noises-2010")
+  noises2010.dataset.status = "inactive"
+  noises2010.addEventListener('click', addNoise2010Heatmap);
   const noises2018 = document.getElementById("noises-2018")
+  noises2018.dataset.status = "inactive"
+  noises2018.addEventListener('click', addNoise2018Heatmap);
+
   if (event.target.innerText === "Noise Complaints: OFF") {
     noisesButton.innerText = "Noise Complaints: ON"
     noises2010.style.display = "inline-block"
@@ -111,90 +143,56 @@ function addNoiseYearButtons(event) {
   }
 }
 
-function addBikeHeatMap(event) {
-  const bikeButton = document.getElementById("bike")
-  const bikeDiv = document.getElementById("bike-buttons")
-  const yearButton2014 = document.createElement("button")
-  yearButton2014.innerText = "2014"
-  yearButton2014.style.display = "none"
-  yearButton2014.id = "bike-2014"
-  const yearButton2018 = document.createElement("button")
-  yearButton2018.innerText = "2018"
-  yearButton2018.style.display = "none"
-  yearButton2018.id = "bike-2018"
-  bikeDiv.appendChild(yearButton2014)
-  bikeDiv.appendChild(yearButton2018)
-    if (event.target.innerText === "Citi Bike Stations: OFF") {
-      fetch('static/citi_bikes2014.json')
-      .then(res => res.json())
-      .then(result => {
-        let locations = result.stationBeanList.map((val) => {
-          return new google.maps.LatLng(val.latitude, val.longitude);
-        })
-        bikeHeatMap = new google.maps.visualization.HeatmapLayer({
-          data: locations,
-          map: map,
-          maxIntensity: maxI,
-          radius: rad,
-          opacity: opac
-        })
+function addNoise2010Heatmap(event) {
+  if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "inactive") {
+    console.log(event.target);
+    fetch('static/pawn_coffee2010.json')
+    .then(res => res.json())
+    .then(result => {
+      let locations = result.map((val) => {
+        return new google.maps.LatLng(val.Latitude, val.Longitude);
       })
-      bikeButton.innerText = "Citi Bike Stations: ON"
-      const button2014 = document.getElementById("bike-2014")
-      button2014.style.display = "block"
-      const button2018 = document.getElementById("bike-2018")
-      button2018.style.display = "inline-flex"
-    } else if (event.target.innerText === "Citi Bike Stations: ON") {
-      const theBut14 = document.getElementById("bike-2014")
-      const theBut18 = document.getElementById("bike-2018")
-      bikeHeatMap = bikeHeatMap.setMap(null)
-      bikeButton.innerText = "Citi Bike Stations: OFF"
-      theBut14.style.display = "none"
-      theBut18.style.display = "none"
-    }
+      shop2010Heatmap = new google.maps.visualization.HeatmapLayer({
+        data: locations,
+        map: map,
+        maxIntensity: maxI,
+        radius: rad,
+        opacity: opac
+      })
+    })
+    event.target.dataset.status = "active"
+  } else if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "active") {
+    shop2010Heatmap = shop2010Heatmap.setMap(null)
+    event.target.dataset.status = "inactive"
   }
+}
 
-  // const theBut14 = document.getElementById("bike-2014")
-  // theBut14.addEventListener('click', event => {
-  //   fetch('static/citi_bikes2014.json')
-  //   .then(res => res.json())
-  //   .then(result => {
-  //     let locations = result.stationBeanList.map((val) => {
-  //       return new google.maps.LatLng(val.latitude, val.longitude);
-  //     })
-  //     bikeHeatMap = new google.maps.visualization.HeatmapLayer({
-  //       data: locations,
-  //       map: map,
-  //       maxIntensity: maxI,
-  //       radius: rad,
-  //       opacity: opac
-  //     })
-  //   })
-  // });
+function addNoise2018Heatmap(event) {
+  if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "inactive") {
+    console.log(event.target);
+    fetch('static/pawn_coffee2010.json')
+    .then(res => res.json())
+    .then(result => {
+      let locations = result.map((val) => {
+        return new google.maps.LatLng(val.Latitude, val.Longitude);
+      })
+      shop2010Heatmap = new google.maps.visualization.HeatmapLayer({
+        data: locations,
+        map: map,
+        maxIntensity: maxI,
+        radius: rad,
+        opacity: opac
+      })
+    })
+    event.target.dataset.status = "active"
+  } else if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "active") {
+    shop2010Heatmap = shop2010Heatmap.setMap(null)
+    event.target.dataset.status = "inactive"
+  }
+}
 
-  function addNoiseHeatMap(event) {
-    const noiseButton = document.getElementById("noise")
-      if (event.target.innerText === "Noise Complaints: OFF") {
-        fetch('static/noise2010.json')
-        .then(res => res.json())
-        .then(result => {
-          let locations = result.map((val) => {
-            return new google.maps.LatLng(val.Latitude, val.Longitude);
-          })
-          noiseHeatMap = new google.maps.visualization.HeatmapLayer({
-            data: locations,
-            map: map,
-            maxIntensity: maxI,
-            radius: rad,
-            opacity: opac
-          })
-        })
-        noiseButton.innerText = "Noise Complaints: ON"
-      } else if (event.target.innerText === "Noise Complaints: ON") {
-        noiseHeatMap = noiseHeatMap.setMap(null)
-        noiseButton.innerText = "Noise Complaints: OFF"
-      }
-    }
+
+/////////////////////////////FUNCTIONS//////////////////////////////////////////
 
 // Function to change the radius of data points on heatmap
 function changeRadius(bool) {
