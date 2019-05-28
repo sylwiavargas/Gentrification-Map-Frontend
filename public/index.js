@@ -29,6 +29,45 @@ function addShopYearButtons(event) {
   }
 }
 
+-----------------------------------
+let seeComments = false;
+
+animalp.addEventListener('click', () => {
+      if (!document.querySelector(`div[data-id="${animal.id}"]`) || seeComments == false){
+        toggleShow(animal);
+        animalInfo.style.display = 'block';
+        seeAnimal = true
+      } else {
+        animalInfo.style.display = 'none';
+        seeAnimal = false
+      }
+    })
+    const delAnimal = animals.querySelector(`#delete-button-${animal.id}`)
+    delAnimal.addEventListener('click', () => {deleteAnimal(animal) })
+  }
+
+  function toggleShow(animal) {
+    const animald = document.createElement('div');
+    animald.dataset.id = animal.id
+    animalInfo.innerHTML = ""
+
+    animald.innerHTML = `<h3>${animal.name} the ${animal.species}</h3>
+    <p> Ferociousness: ${animal.ferociousness} </p>
+    <p> Hobby: ${animal.hobby} </p>
+    <img src = "${animal.image}">`
+
+    const buttonU = document.createElement('update-button')
+    buttonU.innerHTML = `<button id="update-button-${animal.id}">UPDATE</button>`
+    animalInfo.appendChild(animald)
+    animalInfo.appendChild(buttonU)
+    // let {name, species, ferociousness, hobby, image} = animal
+
+  const btnEdit = document.querySelector(`#update-button-${animal.id}`)
+
+  btnEdit.addEventListener('click', () => {editAnimal(animal)})}
+
+---------------------------------------
+
 function addShop2010Heatmap(event) {
   if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons") {
     fetch('static/pawn_coffee2010.json')
