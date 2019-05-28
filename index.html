@@ -68,7 +68,16 @@
       function addBikeHeatMap(event) {
         const bikeButton = document.getElementById("bike")
         const bikeDiv = document.getElementById("bike-buttons")
-        let yearButton2010 = document.createElement("button")
+        const yearButton2014 = document.createElement("button")
+        yearButton2014.innerText = "2014"
+        yearButton2014.style.display = "none"
+        yearButton2014.id = "bike-2014"
+        const yearButton2018 = document.createElement("button")
+        yearButton2018.innerText = "2018"
+        yearButton2018.style.display = "none"
+        yearButton2018.id = "bike-2018"
+        bikeDiv.appendChild(yearButton2014)
+        bikeDiv.appendChild(yearButton2018)
           if (event.target.innerText === "Citi Bike Stations: OFF") {
             fetch('static/citi_bikes2014.json')
             .then(res => res.json())
@@ -85,15 +94,37 @@
               })
             })
             bikeButton.innerText = "Citi Bike Stations: ON"
-            yearButton2010.innerText = "2010"
-            bikeDiv.appendChild(yearButton2010)
+            const button2014 = document.getElementById("bike-2014")
+            button2014.style.display = "block"
+            const button2018 = document.getElementById("bike-2018")
+            button2018.style.display = "inline-flex"
           } else if (event.target.innerText === "Citi Bike Stations: ON") {
+            const theBut14 = document.getElementById("bike-2014")
+            const theBut18 = document.getElementById("bike-2018")
             bikeHeatMap = bikeHeatMap.setMap(null)
             bikeButton.innerText = "Citi Bike Stations: OFF"
-            yearButton2010 = document.createElement("p");
-            yearButton2010.innerHTML = ""
+            theBut14.style.display = "none"
+            theBut18.style.display = "none"
           }
         }
+
+        const theBut14 = document.getElementById("bike-2014")
+        theBut14.addEventListener('click', event => {
+          fetch('static/citi_bikes2014.json')
+          .then(res => res.json())
+          .then(result => {
+            let locations = result.stationBeanList.map((val) => {
+              return new google.maps.LatLng(val.latitude, val.longitude);
+            })
+            bikeHeatMap = new google.maps.visualization.HeatmapLayer({
+              data: locations,
+              map: map,
+              maxIntensity: maxI,
+              radius: rad,
+              opacity: opac
+            })
+          })
+        });
 
         function addNoiseHeatMap(event) {
           const noiseButton = document.getElementById("noise")
