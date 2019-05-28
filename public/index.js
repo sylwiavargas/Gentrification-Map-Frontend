@@ -13,6 +13,8 @@ function initMap() {
 
 const shopsButton = document.getElementById("shops")
 shopsButton.addEventListener('click', addShopYearButtons)
+catId = shopsButton.dataset.id
+shopsButton.addEventListener('click', () => showComments(event, catId))
 
 function addShopYearButtons(event) {
   const shops2010 = document.getElementById("shops-2010")
@@ -33,44 +35,43 @@ function addShopYearButtons(event) {
   }
 }
 
------------------------------------
-let seeComments = false;
+/////////////////////////////////////// FORM
 
-animalp.addEventListener('click', () => {
-      if (!document.querySelector(`div[data-id="${animal.id}"]`) || seeComments == false){
-        toggleShow(animal);
-        animalInfo.style.display = 'block';
-        seeAnimal = true
-      } else {
-        animalInfo.style.display = 'none';
-        seeAnimal = false
-      }
-    })
-    const delAnimal = animals.querySelector(`#delete-button-${animal.id}`)
-    delAnimal.addEventListener('click', () => {deleteAnimal(animal) })
-  }
+function showComments(event, id) {
+  const commentsSection = document.querySelector('#comments')
+  const eForm = document.createElement('form')
+  eForm.innerHTML = ""
+  eForm.innerHTML = `What do you think?<br><br><input type="text" name="content">
+      <br><input type="submit" name="">`
+  commentsSection.append(eForm)
+  eForm.addEventListener('submit', addComment(event, id))
+}
 
-  function toggleShow(animal) {
-    const animald = document.createElement('div');
-    animald.dataset.id = animal.id
-    animalInfo.innerHTML = ""
+function addComment(event, id){
+  event.preventDefault();
+  return fetch('http://localhost:3000/comments', {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(
+      {content: `event.target.children[2].value`,
+    category_id: `${id}`})
+  })
+  .then(res => res.json())
+  .then(comment => (slapItOnTheDiv(comment)))
+}
 
-    animald.innerHTML = `<h3>${animal.name} the ${animal.species}</h3>
-    <p> Ferociousness: ${animal.ferociousness} </p>
-    <p> Hobby: ${animal.hobby} </p>
-    <img src = "${animal.image}">`
+fetch('http://localhost:3000/comments')
+  .then(response => response.json())
+  .then(a => a.forEach(slapItOnTheDiv))
 
-    const buttonU = document.createElement('update-button')
-    buttonU.innerHTML = `<button id="update-button-${animal.id}">UPDATE</button>`
-    animalInfo.appendChild(animald)
-    animalInfo.appendChild(buttonU)
-    // let {name, species, ferociousness, hobby, image} = animal
+  function slapItOnTheDiv(comment) {
+    console.log("hey")}
 
-  const btnEdit = document.querySelector(`#update-button-${animal.id}`)
 
-  btnEdit.addEventListener('click', () => {editAnimal(animal)})}
-
----------------------------------------
+//////////////////////////////////// END OF FORM
 
 function addShop2010Heatmap(event) {
   if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "inactive") {
