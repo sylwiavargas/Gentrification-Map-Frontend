@@ -1,5 +1,5 @@
 #map {
-  width: 80%;
+  width: 50%;
   border-width: medium;
   border-style: double;
 }
@@ -46,6 +46,11 @@ html, body {
 }
 
 .year-button {
+  font-size:25px;
+  display: none;
+}
+
+.explanation {
   font-size:25px;
   display: none;
 }
