@@ -37,7 +37,6 @@ function addShopYearButtons(event) {
 
 function addShop2010Heatmap(event) {
   if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "inactive") {
-    console.log(event.target);
 
     fetch('http://localhost:5000/static/pawn_coffee2010.json')
     .then(res => res.json())
@@ -153,6 +152,55 @@ function addNoise2018Heatmap(event) {
     shop2010Heatmap = shop2010Heatmap.setMap(null)
     event.target.dataset.status = "inactive"
   }
+}
+
+//////////////////////////////COMMENTS-FORM/////////////////////////////////////
+
+function fetchComments() {
+  return fetch('http://localhost:3000/api/v1/comments')
+    .then(response => response.json())
+    .then(comments => comments.forEach(slapItOnTheDiv))
+}
+
+function slapItOnTheDiv(comment) {
+  const ul = document.querySelector('ul')
+  ul.innerHTML = `<li>${comment.content}</li>`
+    }
+
+function showComments(event, id) {
+  event.preventDefault();
+  const commentsSection = document.querySelector('#comments')
+  const commentsContainer = document.querySelector('#container')
+  const eForm = document.createElement('form')
+  commentsContainer.innerHTML = ""
+  eForm.innerHTML = `<h5> What do you think about it? </h5> <input type="text" name="content" class="submissionfield">
+      <br><input type="submit" name="">`
+  commentsContainer.append(eForm)
+  eForm.addEventListener('submit', () => {addComment(event, id)})
+}
+
+function addComment(event, id){
+  event.preventDefault();
+  return fetch('http://localhost:3000/api/v1/comments', {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(
+      {content: `event.target.children[2].value`,
+    category_id: `${id}`})
+  })
+  .then(res => res.json())
+  .then(comment => (slapItOnTheDiv(comment)))
+}
+
+fetch('http://localhost:3000/api/v1/comments')
+  .then(response => response.json())
+  .then(a => a.forEach(slapItOnTheDiv))
+
+function slapItOnTheDiv(comment) {
+  console.log(comment)
 }
 
 
