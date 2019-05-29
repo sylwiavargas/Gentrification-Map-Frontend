@@ -12,10 +12,11 @@ function initMap() {
 //////////////////////////////////SHOPS/////////////////////////////////////////
 
 const shopsButton = document.getElementById("shops")
+let commentHeadline = document.querySelector("h4")
 let shopId = shopsButton.dataset.id
 shopsButton.addEventListener('click', addShopYearButtons)
 shopsButton.addEventListener('click', () => fetchShopComments(event, shopId))
-shopsButton.addEventListener('click', () => showComments(event, shopId))
+// shopsButton.addEventListener('click', () => showForm(event, shopId))
 
 
 function addShopYearButtons(event) {
@@ -32,11 +33,15 @@ function addShopYearButtons(event) {
     shops2010.style.display = "inline-block"
     shops2018.style.display = "inline-block"
     explanation.style.display = "block"
+    // commentHeadline.style.display = "block"
+    showForm(event, shopId)
   } else if (event.target.innerText === "New Coffee Shops: ON") {
+    hideForm()
     shopsButton.innerText = "New Coffee Shops: OFF"
     shops2010.style.display = "none"
     shops2018.style.display = "none"
     explanation.style.display = "none"
+    // commentHeadline.style.display = "none"
     shop2010Heatmap.setMap(null)
     shop2018Heatmap.setMap(null)
   }
@@ -93,7 +98,7 @@ function addShop2018Heatmap(event) {
 
 const noisesButton = document.getElementById("noises")
 let noiseId = noisesButton.dataset.id
-console.log(noiseId);
+// console.log(noiseId);
 noisesButton.addEventListener('click', addNoiseYearButtons)
 noisesButton.addEventListener('click', () => fetchNoiseComments(event, noiseId))
 
@@ -111,11 +116,15 @@ function addNoiseYearButtons(event) {
     noises2010.style.display = "inline-block"
     noises2018.style.display = "inline-block"
     explanation.style.display = "block"
+    // commentHeadline.style.display = "block"
+    showForm(event, noiseId)
   } else if (event.target.innerText === "Noise Complaints: ON") {
+    hideForm()
     noisesButton.innerText = "Noise Complaints: OFF"
     noises2010.style.display = "none"
     noises2018.style.display = "none"
     explanation.style.display = "none"
+    // commentHeadline.style.display = "none"
     noise2010Heatmap.setMap(null)
     noise2018Heatmap.setMap(null)
   }
@@ -171,11 +180,11 @@ function addNoise2018Heatmap(event) {
 //////////////////////////////COMMENTS-FORM/////////////////////////////////////
 
 function fetchShopComments(event, id) {
-  if (event.target.innerText === "Pawn/Coffee Shops: ON") {
+  if (event.target.innerText === "New Coffee Shops: ON") {
     fetch(`http://localhost:3000/api/v1/categories/${id}`)
       .then(response => response.json())
       .then(data => data.comments.forEach(slapItOnTheDiv))
-  } else if (event.target.innerText === "Pawn/Coffee Shops: OFF") {
+  } else if (event.target.innerText === "New Coffee Shops: OFF") {
     const ul = document.querySelector('ul')
     ul.innerHTML = ""
   }
@@ -197,9 +206,8 @@ function slapItOnTheDiv(comment) {
   ul.innerHTML += `<li>${comment.content}</li>`
 }
 
-
-function showComments(event, id) {
-  event.preventDefault();
+function showForm(event, id) {
+  // event.preventDefault();
   const commentsSection = document.querySelector('#comments')
   const commentsContainer = document.querySelector('#section')
   const eForm = document.createElement('form')
@@ -210,9 +218,16 @@ function showComments(event, id) {
   eForm.addEventListener('submit', () => {addComment(event, id)})
 }
 
+function hideForm() {
+  const commentsContainer = document.querySelector('#section')
+  commentsContainer.innerHTML = ""
+}
+
 function addComment(event, id){
   const comment = document.querySelector('#theComment')
-  event.preventDefault();
+  if (comment.value === "") {
+    alert("hey, write your comment!")
+  } else {
   return fetch('http://localhost:3000/api/v1/comments', {
     method: "POST",
     headers: {
@@ -224,7 +239,8 @@ function addComment(event, id){
     category_id: `${id}`})
   })
   .then(res => res.json())
-  .then(comment => (slapItOnTheDiv(comment)))
+  .then(comment => (slapItOnTheDiv(comment)))}
+  event.preventDefault()
 }
 //
 // /////////////////////////////FUNCTIONS//////////////////////////////////////////
@@ -274,5 +290,3 @@ function addComment(event, id){
 //   var multiplier = Math.pow(10, precision || 0);
 //   return Math.round(value * multiplier) / multiplier;
 // }
-
-fetchComments()
