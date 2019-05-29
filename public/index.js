@@ -13,6 +13,8 @@ function initMap() {
 
 const shopsButton = document.getElementById("shops")
 shopsButton.addEventListener('click', addShopYearButtons)
+catId = shopsButton.dataset.id
+shopsButton.addEventListener('click', () => showComments(event, catId))
 
 function addShopYearButtons(event) {
   const shops2010 = document.getElementById("shops-2010")
@@ -32,6 +34,44 @@ function addShopYearButtons(event) {
     shops2018.style.display = "none"
   }
 }
+
+/////////////////////////////////////// FORM
+
+function showComments(event, id) {
+  const commentsSection = document.querySelector('#comments')
+  const eForm = document.createElement('form')
+  eForm.innerHTML = ""
+  eForm.innerHTML = `What do you think?<br><br><input type="text" name="content">
+      <br><input type="submit" name="">`
+  commentsSection.append(eForm)
+  eForm.addEventListener('submit', addComment(event, id))
+}
+
+function addComment(event, id){
+  event.preventDefault();
+  return fetch('http://localhost:3000/comments', {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(
+      {content: `event.target.children[2].value`,
+    category_id: `${id}`})
+  })
+  .then(res => res.json())
+  .then(comment => (slapItOnTheDiv(comment)))
+}
+
+fetch('http://localhost:3000/comments')
+  .then(response => response.json())
+  .then(a => a.forEach(slapItOnTheDiv))
+
+  function slapItOnTheDiv(comment) {
+    console.log("hey")}
+
+
+//////////////////////////////////// END OF FORM
 
 function addShop2010Heatmap(event) {
   if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "inactive") {
