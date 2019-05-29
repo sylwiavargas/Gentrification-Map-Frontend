@@ -14,6 +14,8 @@ function initMap() {
 const shopsButton = document.getElementById("shops")
 let commentHeadline = document.querySelector("h4")
 let shopId = shopsButton.dataset.id
+const ul = document.querySelector('ul')
+
 shopsButton.addEventListener('click', addShopYearButtons)
 shopsButton.addEventListener('click', () => fetchShopComments(event, shopId))
 // shopsButton.addEventListener('click', () => showForm(event, shopId))
@@ -202,7 +204,6 @@ function fetchNoiseComments(event, id) {
 }
 
 function slapItOnTheDiv(comment) {
-  const ul = document.querySelector('ul')
   ul.innerHTML += `<li>${comment.content}</li>`
 }
 
@@ -212,10 +213,13 @@ function showForm(event, id) {
   const commentsContainer = document.querySelector('#section')
   const eForm = document.createElement('form')
   commentsContainer.innerHTML = ""
-  eForm.innerHTML = `<h5> What do you think about it? </h5> <input type="text" name="content" class="submissionfield" id="theComment">
+  eForm.innerHTML = `<h5> What do you think about it? </h5> <input type="text" name="content" class="submissionfield" id="theComment" placeholder="please write your comment!">
       <br><input type="submit" name="">`
   commentsContainer.append(eForm)
-  eForm.addEventListener('submit', () => {addComment(event, id)})
+  eForm.addEventListener('submit', (event) => {
+    addComment(event, id);
+    event.preventDefault()
+  })
 }
 
 function hideForm() {
@@ -224,8 +228,8 @@ function hideForm() {
 }
 
 function addComment(event, id){
-  const comment = document.querySelector('#theComment')
-  if (comment.value === "") {
+  const comment = document.querySelector('#theComment').value
+  if (comment === "") {
     alert("hey, write your comment!")
   } else {
   return fetch('http://localhost:3000/api/v1/comments', {
@@ -235,12 +239,13 @@ function addComment(event, id){
       'Accept': 'application/json'
     },
     body: JSON.stringify(
-      {content: `${comment.value}`,
+      {content: `${comment}`,
     category_id: `${id}`})
   })
-  .then(res => res.json())
-  .then(comment => (slapItOnTheDiv(comment)))}
-  event.preventDefault()
+  .then(ul.innerHTML += `<li>${comment}</li>`)
+  // .then(res => res.json())
+  // .then(comment => (slapItOnTheDiv(comment))
+}
 }
 //
 // /////////////////////////////FUNCTIONS//////////////////////////////////////////
