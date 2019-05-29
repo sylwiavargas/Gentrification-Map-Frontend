@@ -218,6 +218,7 @@ function showForm(event, id) {
   commentsContainer.append(eForm)
   eForm.addEventListener('submit', (event) => {
     addComment(event, id);
+    event.target.children[1].value = ''
     event.preventDefault()
   })
 }
