@@ -28,40 +28,34 @@
       <div id="map"></div>
       <div id="toggles">
         <h3>Toggle:</h3>
-        <div id="shop-buttons">
-          <button id="shops" style="font-size:25px;" data-id="2">New Coffee Shops: OFF</button>
-          <br>
-          <button id="shops-2010" class="year-button">2010</button>
-          <button id="shops-2018" class="year-button">2018</button>
-          <div id="shops-expl" class="explanation">
-                      <br>
-          "This is an example of explanation"
+        <div id="buttonSection">
+          <div id="shop-buttons">
+            <button id="shops" style="font-size:25px; display:inline-block" data-id="2">New Coffee Shops</button>
+            <button id="shops-2010" class="year-button">2010</button>
+            <button id="shops-2018" class="year-button">2018</button>
           </div>
-        </div>
-        <br>
-        <br>
-        <div id="noise-buttons">
-          <button id="noises" style="font-size:25px;" data-id="1">Noise Complaints: OFF</button>
-          <br>
+          <div id="noise-buttons">
+          <button id="noises" style="font-size:25px; display:inline-block" data-id="1">Noise Complaints</button>
           <button id="noises-2010" class="year-button">2010</button>
           <button id="noises-2018" class="year-button">2018</button>
-          <div id="noise-expl" class="explanation">
-            <br>
-            "This is an example of explanation"
           </div>
         </div>
         <div id="comments">
-          <h4> hey </h4>
-            <ul>
-              <!-- <li>This is cool!</li>
-              <br>
-              <li>Nice map!</li> -->
-            </ul>
           <div id ="section">
             <!-- here's the form -->
           </div>
+          <h4 id="cmHeadline"> Here's what others think: </h4>
+          <ul>
+            <!-- <li>This is cool!</li>
+            <br>
+            <li>Nice map!</li> -->
+          </ul>
         </div>
       </div>
+    </div>
+    <div class="explanation">
+      <br>
+    "This is an example of explanation"
     </div>
 
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV6TROSo_K6BDSnZMiA3JHX9mmjX65oOg&libraries=visualization&callback=initMap"></script>

@@ -12,7 +12,8 @@ function initMap() {
 //////////////////////////////////SHOPS/////////////////////////////////////////
 
 const shopsButton = document.getElementById("shops")
-let commentHeadline = document.querySelector("h4")
+let commentHeadline = document.querySelector("#cmHeadline")
+// let buttonHeadline = document.querySelector("#cmHeadline")
 let shopId = shopsButton.dataset.id
 const ul = document.querySelector('ul')
 
@@ -28,22 +29,22 @@ function addShopYearButtons(event) {
   const shops2018 = document.getElementById("shops-2018")
   shops2018.dataset.status = "inactive"
   shops2018.addEventListener('click', addShop2018Heatmap);
-  const explanation = document.getElementById("shops-expl")
+  // const explanation = document.getElementById("shops-expl")
 
-  if (event.target.innerText === "New Coffee Shops: OFF") {
-    shopsButton.innerText = "New Coffee Shops: ON"
+  if (event.target.innerText === "New Coffee Shops") {
+    shopsButton.innerText = "✅ New Coffee Shops"
     shops2010.style.display = "inline-block"
     shops2018.style.display = "inline-block"
-    explanation.style.display = "block"
-    // commentHeadline.style.display = "block"
+    // explanation.style.display = "block"
+    commentHeadline.style.display = "block"
     showForm(event, shopId)
-  } else if (event.target.innerText === "New Coffee Shops: ON") {
+  } else if (event.target.innerText === "✅ New Coffee Shops") {
     hideForm()
-    shopsButton.innerText = "New Coffee Shops: OFF"
+    shopsButton.innerText = "New Coffee Shops"
     shops2010.style.display = "none"
     shops2018.style.display = "none"
-    explanation.style.display = "none"
-    // commentHeadline.style.display = "none"
+    // explanation.style.display = "none"
+    commentHeadline.style.display = "none"
     shop2010Heatmap.setMap(null)
     shop2018Heatmap.setMap(null)
   }
@@ -111,22 +112,22 @@ function addNoiseYearButtons(event) {
   const noises2018 = document.getElementById("noises-2018")
   noises2018.dataset.status = "inactive"
   noises2018.addEventListener('click', addNoise2018Heatmap);
-  const explanation = document.getElementById("noise-expl")
+  // const explanation = document.getElementById("noise-expl")
 
-  if (event.target.innerText === "Noise Complaints: OFF") {
-    noisesButton.innerText = "Noise Complaints: ON"
+  if (event.target.innerText === "Noise Complaints") {
+    noisesButton.innerText = "✅ Noise Complaints"
     noises2010.style.display = "inline-block"
     noises2018.style.display = "inline-block"
-    explanation.style.display = "block"
-    // commentHeadline.style.display = "block"
+    // explanation.style.display = "block"
+    commentHeadline.style.display = "block"
     showForm(event, noiseId)
-  } else if (event.target.innerText === "Noise Complaints: ON") {
+  } else if (event.target.innerText === "✅ Noise Complaints") {
     hideForm()
-    noisesButton.innerText = "Noise Complaints: OFF"
+    noisesButton.innerText = "Noise Complaints"
     noises2010.style.display = "none"
     noises2018.style.display = "none"
-    explanation.style.display = "none"
-    // commentHeadline.style.display = "none"
+    // explanation.style.display = "none"
+    commentHeadline.style.display = "none"
     noise2010Heatmap.setMap(null)
     noise2018Heatmap.setMap(null)
   }
@@ -182,22 +183,22 @@ function addNoise2018Heatmap(event) {
 //////////////////////////////COMMENTS-FORM/////////////////////////////////////
 
 function fetchShopComments(event, id) {
-  if (event.target.innerText === "New Coffee Shops: ON") {
+  if (event.target.innerText === "✅ New Coffee Shops") {
     fetch(`http://localhost:3000/api/v1/categories/${id}`)
       .then(response => response.json())
       .then(data => data.comments.forEach(slapItOnTheDiv))
-  } else if (event.target.innerText === "New Coffee Shops: OFF") {
+  } else if (event.target.innerText === "New Coffee Shops") {
     const ul = document.querySelector('ul')
     ul.innerHTML = ""
   }
 }
 
 function fetchNoiseComments(event, id) {
-  if (event.target.innerText === "Noise Complaints: ON") {
+  if (event.target.innerText === "✅ Noise Complaints") {
     fetch(`http://localhost:3000/api/v1/categories/${id}`)
       .then(response => response.json())
       .then(data => data.comments.forEach(slapItOnTheDiv))
-  } else if (event.target.innerText === "Noise Complaints: OFF") {
+  } else if (event.target.innerText === "Noise Complaints") {
     const ul = document.querySelector('ul')
     ul.innerHTML = ""
   }
