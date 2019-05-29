@@ -12,9 +12,11 @@ function initMap() {
 //////////////////////////////////SHOPS/////////////////////////////////////////
 
 const shopsButton = document.getElementById("shops")
+let shopId = shopsButton.dataset.id
 shopsButton.addEventListener('click', addShopYearButtons)
-catId = shopsButton.dataset.id
-shopsButton.addEventListener('click', () => showComments(event, catId))
+shopsButton.addEventListener('click', () => fetchShopComments(event, shopId))
+shopsButton.addEventListener('click', () => showComments(event, shopId))
+
 
 function addShopYearButtons(event) {
   const shops2010 = document.getElementById("shops-2010")
@@ -35,6 +37,8 @@ function addShopYearButtons(event) {
     shops2010.style.display = "none"
     shops2018.style.display = "none"
     explanation.style.display = "none"
+    shop2010Heatmap.setMap(null)
+    shop2018Heatmap.setMap(null)
   }
 }
 
@@ -88,7 +92,10 @@ function addShop2018Heatmap(event) {
 /////////////////////////////////NOISES/////////////////////////////////////////
 
 const noisesButton = document.getElementById("noises")
+let noiseId = noisesButton.dataset.id
+console.log(noiseId);
 noisesButton.addEventListener('click', addNoiseYearButtons)
+noisesButton.addEventListener('click', () => fetchNoiseComments(event, noiseId))
 
 function addNoiseYearButtons(event) {
   const noises2010 = document.getElementById("noises-2010")
@@ -109,6 +116,8 @@ function addNoiseYearButtons(event) {
     noises2010.style.display = "none"
     noises2018.style.display = "none"
     explanation.style.display = "none"
+    noise2010Heatmap.setMap(null)
+    noise2018Heatmap.setMap(null)
   }
 }
 
@@ -124,7 +133,7 @@ function addNoise2010Heatmap(event) {
       noise2010Heatmap = new google.maps.visualization.HeatmapLayer({
         data: locations,
         map: map,
-        maxIntensity: maxI,
+        maxIntensity: 8,
         radius: 5,
         opacity: opac
       })
@@ -147,7 +156,7 @@ function addNoise2018Heatmap(event) {
       noise2018Heatmap = new google.maps.visualization.HeatmapLayer({
         data: locations,
         map: map,
-        maxIntensity: maxI,
+        maxIntensity: 8,
         radius: 5,
         opacity: opac
       })
@@ -161,14 +170,29 @@ function addNoise2018Heatmap(event) {
 
 //////////////////////////////COMMENTS-FORM/////////////////////////////////////
 
-function fetchComments() {
-  return fetch('http://localhost:3000/api/v1/comments')
-    .then(response => response.json())
-    .then(comments => comments.forEach(slapItOnTheDiv))
+function fetchShopComments(event, id) {
+  if (event.target.innerText === "Pawn/Coffee Shops: ON") {
+    fetch(`http://localhost:3000/api/v1/categories/${id}`)
+      .then(response => response.json())
+      .then(data => data.comments.forEach(slapItOnTheDiv))
+  } else if (event.target.innerText === "Pawn/Coffee Shops: OFF") {
+    const ul = document.querySelector('ul')
+    ul.innerHTML = ""
+  }
+}
+
+function fetchNoiseComments(event, id) {
+  if (event.target.innerText === "Noise Complaints: ON") {
+    fetch(`http://localhost:3000/api/v1/categories/${id}`)
+      .then(response => response.json())
+      .then(data => data.comments.forEach(slapItOnTheDiv))
+  } else if (event.target.innerText === "Noise Complaints: OFF") {
+    const ul = document.querySelector('ul')
+    ul.innerHTML = ""
+  }
 }
 
 function slapItOnTheDiv(comment) {
-  console.log(comment)
   const ul = document.querySelector('ul')
   ul.innerHTML += `<li>${comment.content}</li>`
 }
