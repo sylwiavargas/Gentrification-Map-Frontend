@@ -106,16 +106,16 @@ function addNoiseYearButtons(event) {
   }
 }
 
+
 function addNoise2010Heatmap(event) {
-  if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "inactive") {
-    console.log(event.target);
+  if (event.target.innerText === "2010" && event.target.parentNode.id === "noise-buttons" && event.target.dataset.status === "inactive") {
     fetch('static/pawn_coffee2010.json')
     .then(res => res.json())
     .then(result => {
       let locations = result.map((val) => {
         return new google.maps.LatLng(val.Latitude, val.Longitude);
       })
-      shop2010Heatmap = new google.maps.visualization.HeatmapLayer({
+      noise2010Heatmap = new google.maps.visualization.HeatmapLayer({
         data: locations,
         map: map,
         maxIntensity: maxI,
@@ -124,22 +124,21 @@ function addNoise2010Heatmap(event) {
       })
     })
     event.target.dataset.status = "active"
-  } else if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "active") {
-    shop2010Heatmap = shop2010Heatmap.setMap(null)
+  } else if (event.target.innerText === "2010" && event.target.parentNode.id === "noise-buttons" && event.target.dataset.status === "active") {
+    noise2010Heatmap = noise2010Heatmap.setMap(null)
     event.target.dataset.status = "inactive"
   }
 }
 
 function addNoise2018Heatmap(event) {
-  if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "inactive") {
-    console.log(event.target);
-    fetch('static/pawn_coffee2010.json')
+  if (event.target.innerText === "2018" && event.target.parentNode.id === "noise-buttons" && event.target.dataset.status === "inactive") {
+    fetch('static/pawn_coffee2018.json')
     .then(res => res.json())
     .then(result => {
       let locations = result.map((val) => {
         return new google.maps.LatLng(val.Latitude, val.Longitude);
       })
-      shop2010Heatmap = new google.maps.visualization.HeatmapLayer({
+      noise2018Heatmap = new google.maps.visualization.HeatmapLayer({
         data: locations,
         map: map,
         maxIntensity: maxI,
@@ -148,8 +147,8 @@ function addNoise2018Heatmap(event) {
       })
     })
     event.target.dataset.status = "active"
-  } else if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "active") {
-    shop2010Heatmap = shop2010Heatmap.setMap(null)
+  } else if (event.target.innerText === "2018" && event.target.parentNode.id === "noise-buttons" && event.target.dataset.status === "active") {
+    noise2018Heatmap = noise2018Heatmap.setMap(null)
     event.target.dataset.status = "inactive"
   }
 }
@@ -163,23 +162,26 @@ function fetchComments() {
 }
 
 function slapItOnTheDiv(comment) {
+  console.log(comment)
   const ul = document.querySelector('ul')
-  ul.innerHTML = `<li>${comment.content}</li>`
-    }
+  ul.innerHTML += `<li>${comment.content}</li>`
+}
+
 
 function showComments(event, id) {
   event.preventDefault();
   const commentsSection = document.querySelector('#comments')
-  const commentsContainer = document.querySelector('#container')
+  const commentsContainer = document.querySelector('#section')
   const eForm = document.createElement('form')
   commentsContainer.innerHTML = ""
-  eForm.innerHTML = `<h5> What do you think about it? </h5> <input type="text" name="content" class="submissionfield">
+  eForm.innerHTML = `<h5> What do you think about it? </h5> <input type="text" name="content" class="submissionfield" id="theComment">
       <br><input type="submit" name="">`
   commentsContainer.append(eForm)
   eForm.addEventListener('submit', () => {addComment(event, id)})
 }
 
 function addComment(event, id){
+  const comment = document.querySelector('#theComment')
   event.preventDefault();
   return fetch('http://localhost:3000/api/v1/comments', {
     method: "POST",
@@ -188,21 +190,12 @@ function addComment(event, id){
       'Accept': 'application/json'
     },
     body: JSON.stringify(
-      {content: `event.target.children[2].value`,
+      {content: `${comment.value}`,
     category_id: `${id}`})
   })
   .then(res => res.json())
   .then(comment => (slapItOnTheDiv(comment)))
 }
-
-fetch('http://localhost:3000/api/v1/comments')
-  .then(response => response.json())
-  .then(a => a.forEach(slapItOnTheDiv))
-
-function slapItOnTheDiv(comment) {
-  console.log(comment)
-}
-
 
 /////////////////////////////FUNCTIONS//////////////////////////////////////////
 
