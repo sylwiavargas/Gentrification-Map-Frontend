@@ -12,9 +12,11 @@ function initMap() {
 //////////////////////////////////SHOPS/////////////////////////////////////////
 
 const shopsButton = document.getElementById("shops")
+let shopId = shopsButton.dataset.id
 shopsButton.addEventListener('click', addShopYearButtons)
-catId = shopsButton.dataset.id
-shopsButton.addEventListener('click', () => showComments(event, catId))
+shopsButton.addEventListener('click', () => fetchShopComments(event, shopId))
+shopsButton.addEventListener('click', () => showComments(event, shopId))
+
 
 function addShopYearButtons(event) {
   const shops2010 = document.getElementById("shops-2010")
@@ -32,6 +34,8 @@ function addShopYearButtons(event) {
     shopsButton.innerText = "Pawn/Coffee Shops: OFF"
     shops2010.style.display = "none"
     shops2018.style.display = "none"
+    shop2010Heatmap.setMap(null)
+    shop2018Heatmap.setMap(null)
   }
 }
 
@@ -47,7 +51,7 @@ function addShop2010Heatmap(event) {
       shop2010Heatmap = new google.maps.visualization.HeatmapLayer({
         data: locations,
         map: map,
-        maxIntensity: maxI,
+        maxIntensity: 4,
         radius: rad,
         opacity: opac
       })
@@ -71,7 +75,7 @@ function addShop2018Heatmap(event) {
       shop2018Heatmap = new google.maps.visualization.HeatmapLayer({
         data: locations,
         map: map,
-        maxIntensity: maxI,
+        maxIntensity: 4,
         radius: rad,
         opacity: opac
       })
@@ -85,7 +89,10 @@ function addShop2018Heatmap(event) {
 /////////////////////////////////NOISES/////////////////////////////////////////
 
 const noisesButton = document.getElementById("noises")
+let noiseId = noisesButton.dataset.id
+console.log(noiseId);
 noisesButton.addEventListener('click', addNoiseYearButtons)
+noisesButton.addEventListener('click', () => fetchNoiseComments(event, noiseId))
 
 function addNoiseYearButtons(event) {
   const noises2010 = document.getElementById("noises-2010")
@@ -103,13 +110,15 @@ function addNoiseYearButtons(event) {
     noisesButton.innerText = "Noise Complaints: OFF"
     noises2010.style.display = "none"
     noises2018.style.display = "none"
+    noise2010Heatmap.setMap(null)
+    noise2018Heatmap.setMap(null)
   }
 }
 
 
 function addNoise2010Heatmap(event) {
   if (event.target.innerText === "2010" && event.target.parentNode.id === "noise-buttons" && event.target.dataset.status === "inactive") {
-    fetch('static/pawn_coffee2010.json')
+    fetch('static/noise2010.json')
     .then(res => res.json())
     .then(result => {
       let locations = result.map((val) => {
@@ -118,8 +127,8 @@ function addNoise2010Heatmap(event) {
       noise2010Heatmap = new google.maps.visualization.HeatmapLayer({
         data: locations,
         map: map,
-        maxIntensity: maxI,
-        radius: rad,
+        maxIntensity: 8,
+        radius: 5,
         opacity: opac
       })
     })
@@ -132,7 +141,7 @@ function addNoise2010Heatmap(event) {
 
 function addNoise2018Heatmap(event) {
   if (event.target.innerText === "2018" && event.target.parentNode.id === "noise-buttons" && event.target.dataset.status === "inactive") {
-    fetch('static/pawn_coffee2018.json')
+    fetch('static/noise2018.json')
     .then(res => res.json())
     .then(result => {
       let locations = result.map((val) => {
@@ -141,8 +150,8 @@ function addNoise2018Heatmap(event) {
       noise2018Heatmap = new google.maps.visualization.HeatmapLayer({
         data: locations,
         map: map,
-        maxIntensity: maxI,
-        radius: rad,
+        maxIntensity: 8,
+        radius: 5,
         opacity: opac
       })
     })
@@ -155,14 +164,29 @@ function addNoise2018Heatmap(event) {
 
 //////////////////////////////COMMENTS-FORM/////////////////////////////////////
 
-function fetchComments() {
-  return fetch('http://localhost:3000/api/v1/comments')
-    .then(response => response.json())
-    .then(comments => comments.forEach(slapItOnTheDiv))
+function fetchShopComments(event, id) {
+  if (event.target.innerText === "Pawn/Coffee Shops: ON") {
+    fetch(`http://localhost:3000/api/v1/categories/${id}`)
+      .then(response => response.json())
+      .then(data => data.comments.forEach(slapItOnTheDiv))
+  } else if (event.target.innerText === "Pawn/Coffee Shops: OFF") {
+    const ul = document.querySelector('ul')
+    ul.innerHTML = ""
+  }
+}
+
+function fetchNoiseComments(event, id) {
+  if (event.target.innerText === "Noise Complaints: ON") {
+    fetch(`http://localhost:3000/api/v1/categories/${id}`)
+      .then(response => response.json())
+      .then(data => data.comments.forEach(slapItOnTheDiv))
+  } else if (event.target.innerText === "Noise Complaints: OFF") {
+    const ul = document.querySelector('ul')
+    ul.innerHTML = ""
+  }
 }
 
 function slapItOnTheDiv(comment) {
-  console.log(comment)
   const ul = document.querySelector('ul')
   ul.innerHTML += `<li>${comment.content}</li>`
 }
@@ -198,51 +222,3 @@ function addComment(event, id){
 }
 
 /////////////////////////////FUNCTIONS//////////////////////////////////////////
-
-// Function to change the radius of data points on heatmap
-function changeRadius(bool) {
-  const step = 2, min = 0, max = 50;
-  let current = heatmap.get('radius');
-  let newValue = toggleUpDown(bool, current, step, min, max);
-
-  heatmap.set('radius', newValue);
-  document.getElementById("radiusNum").innerText = newValue;
-};
-
-// Function to change the opacity of the heatmap
-function changeOpacity(bool) {
-  const step = .2, min = 0, max = 1;
-  let current = heatmap.get('opacity');
-  let newValue = toggleUpDown(bool, current, step, min, max);
-  let rounded = round(newValue, 1);
-
-  heatmap.set('opacity', rounded);
-  document.getElementById("opacityNum").innerText = rounded;
-}
-
-// Function to change maxIntensity of the heatmap
-function changeIntensity(bool) {
-  const step = 10, min = 0, max = 1000;
-  let current = heatmap.get('maxIntensity');
-  let newValue = toggleUpDown(bool, current, step, min, max);
-
-  heatmap.set('maxIntensity', newValue);
-  document.getElementById("intensityNum").innerText = newValue;
-};
-
-// Changes our toggle values and keeps them within our min/max values
-function toggleUpDown(bool, current, step, min, max){
-  if (bool && current >= max) return current;
-  if (!bool && current <= min) return current;
-
-  if (bool) return current + step;
-  return current - step;
-}
-
-// Used to round the opacity toggle to one decimal place
-function round(value, precision) {
-  var multiplier = Math.pow(10, precision || 0);
-  return Math.round(value * multiplier) / multiplier;
-}
-
-fetchComments()
