@@ -37,14 +37,27 @@ function addShopYearButtons(event) {
 
 /////////////////////////////////////// FORM
 
+function fetchComments() {
+  return fetch('http://localhost:3000/comments')
+    .then(response => response.json())
+    .then(comments => comments.forEach(slapItOnTheDiv))
+}
+
+function slapItOnTheDiv(comment) {
+  const ul = document.querySelector('ul')
+  ul.innerHTML = `<li>${comment.content}</li>`
+    }
+
 function showComments(event, id) {
+  event.preventDefault();
   const commentsSection = document.querySelector('#comments')
+  const commentsContainer = document.querySelector('#container')
   const eForm = document.createElement('form')
-  eForm.innerHTML = ""
-  eForm.innerHTML = `What do you think?<br><br><input type="text" name="content">
+  commentsContainer.innerHTML = ""
+  eForm.innerHTML = `<h5> What do you think about it? </h5> <input type="text" name="content" class="submissionfield">
       <br><input type="submit" name="">`
-  commentsSection.append(eForm)
-  eForm.addEventListener('submit', addComment(event, id))
+  commentsContainer.append(eForm)
+  eForm.addEventListener('submit', () => {addComment(event, id)})
 }
 
 function addComment(event, id){
@@ -63,20 +76,14 @@ function addComment(event, id){
   .then(comment => (slapItOnTheDiv(comment)))
 }
 
-fetch('http://localhost:3000/comments')
-  .then(response => response.json())
-  .then(a => a.forEach(slapItOnTheDiv))
-
-  function slapItOnTheDiv(comment) {
-    console.log("hey")}
-
 
 //////////////////////////////////// END OF FORM
 
 function addShop2010Heatmap(event) {
   if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "inactive") {
     console.log(event.target);
-    fetch('static/pawn_coffee2010.json')
+
+    fetch('http://localhost:5000/static/pawn_coffee2010.json')
     .then(res => res.json())
     .then(result => {
       let locations = result.map((val) => {
@@ -100,7 +107,7 @@ function addShop2010Heatmap(event) {
 function addShop2018Heatmap(event) {
   if (event.target.innerText === "2018" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "inactive") {
     console.log(event.target);
-    fetch('static/pawn_coffee2018.json')
+    fetch('http://localhost:5000/static/pawn_coffee2018.json')
     .then(res => res.json())
     .then(result => {
       let locations = result.map((val) => {
