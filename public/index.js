@@ -67,8 +67,9 @@ fetch('http://localhost:3000/comments')
   .then(response => response.json())
   .then(a => a.forEach(slapItOnTheDiv))
 
-  function slapItOnTheDiv(comment) {
-    console.log("hey")}
+function slapItOnTheDiv(comment) {
+  console.log(comment)
+}
 
 
 //////////////////////////////////// END OF FORM
