@@ -1,14 +1,29 @@
 {
-  "name": "javascript-heatmap-creator",
+  "name": "gentrification-heatmap-frontend",
   "version": "1.0.0",
-  "description": "An easy way to visualize your location history with Google and JavaScript",
+  "description": "see gentrification",
+  "main": "app.js",
   "dependencies": {
-    "express": "^4.16.2",
-    "path": "^0.12.7"
+    "express": "^4.17.1"
   },
+  "devDependencies": {},
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "author": "Brandon Morelli",
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sylwiavargas/Gentrification-HeatMap-FrontEnd.git"
+  },
+  "keywords": [
+    "gentrification",
+    "flatiron",
+    "exercise"
+  ],
+  "author": "sylwia vargas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sylwiavargas/Gentrification-HeatMap-FrontEnd/issues"
+  },
+  "homepage": "https://github.com/sylwiavargas/Gentrification-HeatMap-FrontEnd#readme"
 }

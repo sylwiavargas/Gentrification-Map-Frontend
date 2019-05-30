@@ -10,7 +10,7 @@
 }
 html, body {
   height: 100%;
-  margin: 0;
+  margin-left: 2%;
   padding: 0;
 }
 #floating-panel {
@@ -52,7 +52,6 @@ html, body {
 
 .explanation {
   font-size:25px;
-  display: none;
 }
 
 .submissionfield{
