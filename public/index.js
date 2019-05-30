@@ -123,6 +123,13 @@ function initMap() {
   }
 }
 
+function dark() {
+  darkMode = false
+  initMap()
+}
+
+// dark()
+
 //////////////////////////////////SHOPS/////////////////////////////////////////
 
 const shopsButton = document.getElementById("shops")
@@ -150,14 +157,14 @@ function addShopYearButtons(event) {
     shopsButton.innerText = "✅ New Coffee Shops"
     shops2010.style.display = "inline-block"
     shops2018.style.display = "inline-block"
-    // explanation.style.display = "block"
     commentHeadline.style.display = "block"
     showForm(event, shopId)
   } else if (event.target.innerText == "✅ New Coffee Shops" && noisesButton.innerText == "✅ Noise Complaints") {
     shopsButton.innerText = "New Coffee Shops"
     shops2010.style.display = "none"
     shops2018.style.display = "none"
-    // explanation.style.display = "none"
+    fetchNoiseComments(event, 1)
+    showForm(event, noiseId)
     // commentHeadline.style.display = "none"
     shop2010Heatmap.setMap(null)
     shop2018Heatmap.setMap(null)
@@ -249,6 +256,8 @@ function addNoiseYearButtons(event) {
     noisesButton.innerText = "Noise Complaints"
     noises2010.style.display = "none"
     noises2018.style.display = "none"
+    showForm(event, shopId)
+    fetchShopComments(event, 2)
     // explanation.style.display = "none"
     // commentHeadline.style.display = "none"
     noise2010Heatmap.setMap(null)
@@ -315,22 +324,22 @@ function addNoise2018Heatmap(event) {
 //////////////////////////////COMMENTS-FORM/////////////////////////////////////
 
 function fetchShopComments(event, id) {
-  if (event.target.innerText == "✅ New Coffee Shops") {
+  if (shopsButton.innerText == "✅ New Coffee Shops") {
     fetch(`http://localhost:3000/api/v1/categories/${id}`)
       .then(response => response.json())
       .then(data => data.comments.forEach(slapItOnTheDiv))
-  } else if (event.target.innerText == "New Coffee Shops") {
+  } else if (shopsButton.innerText == "New Coffee Shops") {
     const ul = document.querySelector('ul')
     ul.innerHTML = ""
   }
 }
 
 function fetchNoiseComments(event, id) {
-  if (event.target.innerText == "✅ Noise Complaints") {
+  if (noisesButton.innerText == "✅ Noise Complaints") {
     fetch(`http://localhost:3000/api/v1/categories/${id}`)
       .then(response => response.json())
       .then(data => data.comments.forEach(slapItOnTheDiv))
-  } else if (event.target.innerText == "Noise Complaints") {
+  } else if (noisesButton.innerText == "Noise Complaints") {
     const ul = document.querySelector('ul')
     ul.innerHTML = ""
   }
