@@ -1,0 +1,26 @@
+{
+  "name": "gentrification-heatmap-frontend",
+  "version": "1.0.0",
+  "description": "see gentrification",
+  "main": "app.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sylwiavargas/Gentrification-HeatMap-FrontEnd.git"
+  },
+  "keywords": [
+    "gentrification",
+    "flatiron",
+    "exercise"
+  ],
+  "author": "sylwia vargas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sylwiavargas/Gentrification-HeatMap-FrontEnd/issues"
+  },
+  "homepage": "https://github.com/sylwiavargas/Gentrification-HeatMap-FrontEnd#readme"
+}

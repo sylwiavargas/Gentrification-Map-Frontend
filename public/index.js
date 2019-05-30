@@ -31,14 +31,14 @@ function addShopYearButtons(event) {
   shops2018.addEventListener('click', addShop2018Heatmap);
   // const explanation = document.getElementById("shops-expl")
 
-  if (event.target.innerText === "New Coffee Shops") {
+  if (event.target.innerText == "New Coffee Shops") {
     shopsButton.innerText = "✅ New Coffee Shops"
     shops2010.style.display = "inline-block"
     shops2018.style.display = "inline-block"
     // explanation.style.display = "block"
     commentHeadline.style.display = "block"
     showForm(event, shopId)
-  } else if (event.target.innerText === "✅ New Coffee Shops" && noisesButton.innerText == "✅ Noise Complaints") {
+  } else if (event.target.innerText == "✅ New Coffee Shops" && noisesButton.innerText == "✅ Noise Complaints") {
     shopsButton.innerText = "New Coffee Shops"
     shops2010.style.display = "none"
     shops2018.style.display = "none"
@@ -59,7 +59,7 @@ function addShopYearButtons(event) {
 }
 
 function addShop2010Heatmap(event) {
-  if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "inactive") {
+  if (event.target.innerText == "2010" && event.target.parentNode.id == "shop-buttons" && event.target.dataset.status == "inactive") {
 
     fetch('http://localhost:5000/static/pawn_coffee2010.json')
     .then(res => res.json())
@@ -76,14 +76,14 @@ function addShop2010Heatmap(event) {
       })
     })
     event.target.dataset.status = "active"
-  } else if (event.target.innerText === "2010" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "active") {
+  } else if (event.target.innerText == "2010" && event.target.parentNode.id == "shop-buttons" && event.target.dataset.status == "active") {
     shop2010Heatmap = shop2010Heatmap.setMap(null)
     event.target.dataset.status = "inactive"
   }
 }
 
 function addShop2018Heatmap(event) {
-  if (event.target.innerText === "2018" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "inactive") {
+  if (event.target.innerText == "2018" && event.target.parentNode.id == "shop-buttons" && event.target.dataset.status == "inactive") {
     console.log(event.target);
     fetch('http://localhost:5000/static/pawn_coffee2018.json')
     .then(res => res.json())
@@ -100,7 +100,7 @@ function addShop2018Heatmap(event) {
       })
     })
     event.target.dataset.status = "active"
-  } else if (event.target.innerText === "2018" && event.target.parentNode.id === "shop-buttons" && event.target.dataset.status === "active") {
+  } else if (event.target.innerText == "2018" && event.target.parentNode.id == "shop-buttons" && event.target.dataset.status == "active") {
     shop2018Heatmap = shop2018Heatmap.setMap(null)
     event.target.dataset.status = "inactive"
   }
@@ -122,7 +122,7 @@ function addNoiseYearButtons(event) {
   noises2018.addEventListener('click', addNoise2018Heatmap);
   // const explanation = document.getElementById("noise-expl")
 
-  if (event.target.innerText === "Noise Complaints") {
+  if (event.target.innerText == "Noise Complaints") {
     noisesButton.innerText = "✅ Noise Complaints"
     noises2010.style.display = "inline-block"
     noises2018.style.display = "inline-block"
@@ -130,7 +130,7 @@ function addNoiseYearButtons(event) {
     commentHeadline.style.display = "block"
     showForm(event, noiseId)
     // fetchNoiseComments(event, noiseId)
-  } else if (event.target.innerText === "✅ Noise Complaints" && shopsButton.innerText == "✅ New Coffee Shops") {
+  } else if (event.target.innerText == "✅ Noise Complaints" && shopsButton.innerText == "✅ New Coffee Shops") {
     noisesButton.innerText = "Noise Complaints"
     noises2010.style.display = "none"
     noises2018.style.display = "none"
@@ -152,7 +152,7 @@ function addNoiseYearButtons(event) {
 
 
 function addNoise2010Heatmap(event) {
-  if (event.target.innerText === "2010" && event.target.parentNode.id === "noise-buttons" && event.target.dataset.status === "inactive") {
+  if (event.target.innerText == "2010" && event.target.parentNode.id == "noise-buttons" && event.target.dataset.status == "inactive") {
     fetch('static/noise2010.json')
     .then(res => res.json())
     .then(result => {
@@ -168,14 +168,14 @@ function addNoise2010Heatmap(event) {
       })
     })
     event.target.dataset.status = "active"
-  } else if (event.target.innerText === "2010" && event.target.parentNode.id === "noise-buttons" && event.target.dataset.status === "active") {
+  } else if (event.target.innerText == "2010" && event.target.parentNode.id == "noise-buttons" && event.target.dataset.status == "active") {
     noise2010Heatmap = noise2010Heatmap.setMap(null)
     event.target.dataset.status = "inactive"
   }
 }
 
 function addNoise2018Heatmap(event) {
-  if (event.target.innerText === "2018" && event.target.parentNode.id === "noise-buttons" && event.target.dataset.status === "inactive") {
+  if (event.target.innerText == "2018" && event.target.parentNode.id == "noise-buttons" && event.target.dataset.status == "inactive") {
     fetch('static/noise2018.json')
     .then(res => res.json())
     .then(result => {
@@ -191,7 +191,7 @@ function addNoise2018Heatmap(event) {
       })
     })
     event.target.dataset.status = "active"
-  } else if (event.target.innerText === "2018" && event.target.parentNode.id === "noise-buttons" && event.target.dataset.status === "active") {
+  } else if (event.target.innerText == "2018" && event.target.parentNode.id == "noise-buttons" && event.target.dataset.status == "active") {
     noise2018Heatmap = noise2018Heatmap.setMap(null)
     event.target.dataset.status = "inactive"
   }
@@ -200,22 +200,22 @@ function addNoise2018Heatmap(event) {
 //////////////////////////////COMMENTS-FORM/////////////////////////////////////
 
 function fetchShopComments(event, id) {
-  if (event.target.innerText === "✅ New Coffee Shops") {
+  if (event.target.innerText == "✅ New Coffee Shops") {
     fetch(`http://localhost:3000/api/v1/categories/${id}`)
       .then(response => response.json())
       .then(data => data.comments.forEach(slapItOnTheDiv))
-  } else if (event.target.innerText === "New Coffee Shops") {
+  } else if (event.target.innerText == "New Coffee Shops") {
     const ul = document.querySelector('ul')
     ul.innerHTML = ""
   }
 }
 
 function fetchNoiseComments(event, id) {
-  if (event.target.innerText === "✅ Noise Complaints") {
+  if (event.target.innerText == "✅ Noise Complaints") {
     fetch(`http://localhost:3000/api/v1/categories/${id}`)
       .then(response => response.json())
       .then(data => data.comments.forEach(slapItOnTheDiv))
-  } else if (event.target.innerText === "Noise Complaints") {
+  } else if (event.target.innerText == "Noise Complaints") {
     const ul = document.querySelector('ul')
     ul.innerHTML = ""
   }
@@ -248,7 +248,7 @@ function hideForm() {
 
 function addComment(event, id){
   const comment = document.querySelector('#theComment').value
-  if (comment === "") {
+  if (comment == "") {
     alert("hey, write your comment!")
   } else {
   return fetch('http://localhost:3000/api/v1/comments', {
