@@ -5,8 +5,34 @@
     <title>Heatmaps</title>
     <link rel="stylesheet" href="static/stylesheet.css">
   </head>
-  <body>
-    <h1 style="margin-left:1%;">Welcome to My Heat Map</h1>
+  <body class="light">
+    <!-- <div id="floating-panel">
+      <div class="group">
+          <div class="subject">Radius <span id=radiusNum>10</span></div>
+          <button onclick="changeRadius(true)">Up</button>
+          <button onclick="changeRadius(false)">Down</button>
+      </div>
+      <div class="group">
+          <div class="subject">Intensity <span id=intensityNum>0</span></div>
+          <button onclick="changeIntensity(true)">Up</button>
+          <button onclick="changeIntensity(false)">Down</button>
+      </div>
+      <div class="group">
+          <div class="subject">Opacity <span id=opacityNum>.6</span></div>
+          <button onclick="changeOpacity(true)">Up</button>
+          <button onclick="changeOpacity(false)">Down</button>
+      </div>
+    </div> -->
+    <h1>Welcome to My Heat Map</h1>
+    <div id="switchy">
+      <label class="switch">
+        <input id="checkMe" type="checkbox">
+        <span class="slider round"></span>
+      </label>
+      <h5>Dark Mode</h5>
+    </div>
+
+
     <div id="map-container">
       <div id="map"></div>
       <div id="toggles">
