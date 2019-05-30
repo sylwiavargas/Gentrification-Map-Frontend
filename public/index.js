@@ -324,7 +324,6 @@ function slapItOnTheDiv(comment) {
 }
 
 function showForm(event, id) {
-  // event.preventDefault();
   const commentsSection = document.querySelector('#comments')
   const commentsContainer = document.querySelector('#section')
   const eForm = document.createElement('form')
@@ -360,55 +359,5 @@ function addComment(event, id){
     category_id: `${id}`})
   })
   .then(ul.innerHTML += `<li>${comment}</li>`)
-  // .then(res => res.json())
-  // .then(comment => (slapItOnTheDiv(comment))
 }
 }
-//
-// /////////////////////////////FUNCTIONS//////////////////////////////////////////
-//
-// // Function to change the radius of data points on heatmap
-// function changeRadius(bool) {
-//   const step = 2, min = 0, max = 50;
-//   let current = heatmap.get('radius');
-//   let newValue = toggleUpDown(bool, current, step, min, max);
-//
-//   heatmap.set('radius', newValue);
-//   document.getElementById("radiusNum").innerText = newValue;
-// };
-//
-// // Function to change the opacity of the heatmap
-// function changeOpacity(bool) {
-//   const step = .2, min = 0, max = 1;
-//   let current = heatmap.get('opacity');
-//   let newValue = toggleUpDown(bool, current, step, min, max);
-//   let rounded = round(newValue, 1);
-//
-//   heatmap.set('opacity', rounded);
-//   document.getElementById("opacityNum").innerText = rounded;
-// }
-//
-// // Function to change maxIntensity of the heatmap
-// function changeIntensity(bool) {
-//   const step = 10, min = 0, max = 1000;
-//   let current = heatmap.get('maxIntensity');
-//   let newValue = toggleUpDown(bool, current, step, min, max);
-//
-//   heatmap.set('maxIntensity', newValue);
-//   document.getElementById("intensityNum").innerText = newValue;
-// };
-//
-// // Changes our toggle values and keeps them within our min/max values
-// function toggleUpDown(bool, current, step, min, max){
-//   if (bool && current >= max) return current;
-//   if (!bool && current <= min) return current;
-//
-//   if (bool) return current + step;
-//   return current - step;
-// }
-//
-// // Used to round the opacity toggle to one decimal place
-// function round(value, precision) {
-//   var multiplier = Math.pow(10, precision || 0);
-//   return Math.round(value * multiplier) / multiplier;
-// }
