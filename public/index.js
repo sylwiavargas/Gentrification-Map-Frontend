@@ -2,26 +2,38 @@ const maxI = 10, rad = 10, opac = .6;
 let map, shop2010Heatmap, shop2018Heatmap, noise2010Heatmap, noise2018Heatmap;
 
 let darkMode = false
-const dark = document.getElementById("checkMe")
+// const dark = document.getElementById("checkMe")
 const body = document.querySelector('body');
-console.log(body);
+const darkModeBtn = document.querySelector("#access")
 
-
-dark.addEventListener('click', event => {
-  if (dark.checked === false) {
+darkModeBtn.addEventListener('click', event => {
+  if (darkMode == true) {
     darkMode = false
     initMap()
     body.classList.add("light")
     body.classList.remove("dark")
-    console.log("light");
-  } else if (dark.checked === true) {
+  } else if (darkMode == false) {
     darkMode = true
     initMap()
     body.classList.add("dark")
     body.classList.remove("light")
-    console.log("dark");
   }
 });
+
+// dark.addEventListener('click', event => {
+//   if (dark.checked === false) {
+//     darkMode = false
+//     initMap()
+//     body.classList.add("light")
+//     body.classList.remove("dark")
+//   } else if (dark.checked === true) {
+//     darkMode = true
+//     initMap()
+//     body.classList.add("dark")
+//     body.classList.remove("light")
+//     console.log("dark");
+//   }
+// });
 
 
 // let darkMode = true
@@ -154,12 +166,13 @@ function addShopYearButtons(event) {
 
 
   if (event.target.innerText == "New Coffee Shops") {
-    shopsButton.innerText = "✅ New Coffee Shops"
+    shopsButton.innerText = "New Coffee Shops:"
+    // shopsButton.classList.add("chosen")
     shops2010.style.display = "inline-block"
     shops2018.style.display = "inline-block"
     commentHeadline.style.display = "block"
     showForm(event, shopId)
-  } else if (event.target.innerText == "✅ New Coffee Shops" && noisesButton.innerText == "✅ Noise Complaints") {
+  } else if (event.target.innerText == "New Coffee Shops:" && noisesButton.innerText == "Noise Complaints:") {
     shopsButton.innerText = "New Coffee Shops"
     shops2010.style.display = "none"
     shops2018.style.display = "none"
@@ -245,14 +258,14 @@ function addNoiseYearButtons(event) {
   // const explanation = document.getElementById("noise-expl")
 
   if (event.target.innerText == "Noise Complaints") {
-    noisesButton.innerText = "✅ Noise Complaints"
+    noisesButton.innerText = "Noise Complaints:"
     noises2010.style.display = "inline-block"
     noises2018.style.display = "inline-block"
     // explanation.style.display = "block"
     commentHeadline.style.display = "block"
     showForm(event, noiseId)
     // fetchNoiseComments(event, noiseId)
-  } else if (event.target.innerText == "✅ Noise Complaints" && shopsButton.innerText == "✅ New Coffee Shops") {
+  } else if (event.target.innerText == "Noise Complaints:" && shopsButton.innerText == "New Coffee Shops:") {
     noisesButton.innerText = "Noise Complaints"
     noises2010.style.display = "none"
     noises2018.style.display = "none"
@@ -324,7 +337,7 @@ function addNoise2018Heatmap(event) {
 //////////////////////////////COMMENTS-FORM/////////////////////////////////////
 
 function fetchShopComments(event, id) {
-  if (shopsButton.innerText == "✅ New Coffee Shops") {
+  if (shopsButton.innerText == "New Coffee Shops:") {
     fetch(`http://localhost:3000/api/v1/categories/${id}`)
       .then(response => response.json())
       .then(data => data.comments.forEach(slapItOnTheDiv))
@@ -335,7 +348,7 @@ function fetchShopComments(event, id) {
 }
 
 function fetchNoiseComments(event, id) {
-  if (noisesButton.innerText == "✅ Noise Complaints") {
+  if (noisesButton.innerText == "Noise Complaints:") {
     fetch(`http://localhost:3000/api/v1/categories/${id}`)
       .then(response => response.json())
       .then(data => data.comments.forEach(slapItOnTheDiv))

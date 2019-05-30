@@ -2,41 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Heatmaps</title>
+    <title>Gentrification Heatmap</title>
     <link rel="stylesheet" href="static/stylesheet.css">
   </head>
+
   <body class="light">
-    <!-- <div id="floating-panel">
-      <div class="group">
-          <div class="subject">Radius <span id=radiusNum>10</span></div>
-          <button onclick="changeRadius(true)">Up</button>
-          <button onclick="changeRadius(false)">Down</button>
-      </div>
-      <div class="group">
-          <div class="subject">Intensity <span id=intensityNum>0</span></div>
-          <button onclick="changeIntensity(true)">Up</button>
-          <button onclick="changeIntensity(false)">Down</button>
-      </div>
-      <div class="group">
-          <div class="subject">Opacity <span id=opacityNum>.6</span></div>
-          <button onclick="changeOpacity(true)">Up</button>
-          <button onclick="changeOpacity(false)">Down</button>
-      </div>
-    </div> -->
-    <h1>Welcome to My Heat Map</h1>
-    <div id="switchy">
-      <label class="switch">
-        <input id="checkMe" type="checkbox">
-        <span class="slider round"></span>
-      </label>
-      <h5>Dark Mode</h5>
+
+    <div id="navbar">
+      <button type="button" id="access"> Contrast 🌗</button>
     </div>
 
+    <h1>Gentrification.<br>See for yourself. </h1>
 
     <div id="map-container">
       <div id="map"></div>
       <div id="toggles">
-        <h3>Toggle:</h3>
+        <h3>Check it:</h3>
         <div id="buttonSection">
           <div id="shop-buttons">
             <button id="shops" style="font-size:25px; display:inline-block" data-id="2">New Coffee Shops</button>
