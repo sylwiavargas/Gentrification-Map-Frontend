@@ -1,6 +1,31 @@
 const maxI = 10, rad = 10, opac = .6;
 let map, shop2010Heatmap, shop2018Heatmap, noise2010Heatmap, noise2018Heatmap;
-let darkMode = true
+
+let darkMode = false
+const dark = document.getElementById("checkMe")
+const body = document.querySelector('body');
+console.log(body);
+
+
+dark.addEventListener('click', event => {
+  if (dark.checked === false) {
+    darkMode = false
+    initMap()
+    body.classList.add("light")
+    body.classList.remove("dark")
+    console.log("light");
+  } else if (dark.checked === true) {
+    darkMode = true
+    initMap()
+    body.classList.add("dark")
+    body.classList.remove("light")
+    console.log("dark");
+  }
+});
+
+
+// let darkMode = true
+
 
 function initMap() {
   if (darkMode == false) {
@@ -119,6 +144,7 @@ function addShopYearButtons(event) {
   shops2018.dataset.status = "inactive"
   shops2018.addEventListener('click', addShop2018Heatmap);
   // const explanation = document.getElementById("shops-expl")
+
 
   if (event.target.innerText == "New Coffee Shops") {
     shopsButton.innerText = "✅ New Coffee Shops"
@@ -311,6 +337,8 @@ function fetchNoiseComments(event, id) {
 }
 
 function slapItOnTheDiv(comment) {
+
+  const ul = document.querySelector('ul')
   ul.innerHTML += `<li>${comment.content}</li>`
 }
 
