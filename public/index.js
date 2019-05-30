@@ -42,13 +42,13 @@ darkModeBtn.addEventListener('click', event => {
 function initMap() {
   if (darkMode == false) {
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
+    zoom: 11,
     center: {lat: 40.759917, lng: -73.897947},
     mapTypeId: 'roadmap',
   })}
   else {
     map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 12,
+      zoom: 11,
       center: {lat: 40.759917, lng: -73.897947},
       mapTypeId: 'roadmap',
       styles: [
@@ -369,8 +369,8 @@ function showForm(event, id) {
   const commentsContainer = document.querySelector('#section')
   const eForm = document.createElement('form')
   commentsContainer.innerHTML = ""
-  eForm.innerHTML = `<h5> What do you think about it? </h5> <input type="text" name="content" class="submissionfield" id="theComment" placeholder="please write your comment!">
-      <br><input type="submit" name="">`
+  eForm.innerHTML = `<h3> What do you think about it? </h3> <input type="text" name="content" class="submissionfield" id="theComment" placeholder="please write your comment!">
+      <br><input type="submit" name="submit" style="font-size: 20px;">`
   commentsContainer.append(eForm)
   eForm.addEventListener('submit', (event) => {
     addComment(event, id);

@@ -1,13 +1,28 @@
 #map {
-  width: 50%;
+  width: 60%;
   border-width: medium;
   border-style: double;
 }
 #map-container {
   display: flex;
-  height: 80%;
+  height: 50%;
   margin-bottom: none;
 }
+
+/* THEMES */
+
+.light {
+  background-color: #fff;
+  color: #151513;
+}
+
+.dark {
+  background-color: #0e111d;
+  color: #e3e1df;
+}
+
+/* GENERAL */
+
 html, body {
   height: 100%;
   margin-left: 2%;
@@ -15,13 +30,12 @@ html, body {
   font-family: 'Helvetica Neue', sans-serif;
 }
 
-#navbar {
-  padding: 2%;
-}
-
 #access {
   font-size: 20px;
   width: 150px;
+  float: right;
+  margin-top: 25px;
+  margin-right: 30px;
 }
 
 /* BUTTONS */
@@ -43,6 +57,8 @@ button {
   width: 90px;
 }
 
+/* TEXT */
+
 h1 {
   font-size: 100px;
   letter-spacing: -1px;
@@ -50,7 +66,28 @@ h1 {
   text-align: left;
   margin-left: 1%;
   margin-top: 30px;
+  margin-bottom: 60px;
 }
+
+h2 {
+  font-size: 30px;
+}
+
+#cmHeadline{
+  font-size: 20px;
+  display: none;
+}
+
+h3 {
+  font-size: 20px;
+  margin-top: 50px;
+}
+
+
+h4{
+  display: none;
+}
+
 
 /* a {
   text-decoration: none;
@@ -96,82 +133,44 @@ h1:hover {
   margin-left: 3%;
 }
 
+.header{
+  width: 60%;
+  display: inline-block;
+}
+
+.check-it{
+  width: 30%;
+  float: right;
+}
+
+.explanation {
+  font-size:25px;
+}
+
+
+/* COMMENT SECTION + FORM */
 
 #comments {
   margin-left: 3%;
 }
 
 
-
-.explanation {
-  font-size:25px;
-}
-
 .submissionfield{
   width: 300px;
   height: 150px;
-  border: 1px solid #999999;
+  border: 1px solid #0e111d;
   padding: 5px;
+  font-size: 20px;
 }
 
-h4{
-  display: none;
-}
-
-
-
-
-/////
-.light {
-  background-color: #fff;
-  page-width: 70em;
-  primary-color: #151513;
-  color: #151513;
-  subtle-primary-color: #151513;
-  block-background-color: #f1f3f4;
-  menu-item-color: #000;
-  menu-item-hover-color: #000;
-  menu-item-alert-bg: #ffffff;
-  menu-item-alert-shadow: #dfe1e7;
-  alert-border-color: #dfe1e7;
-  tertiary-color:: #727680;
-}
-
-.dark {
-  background-color: #0e111d;
-  color: #e3e1df;
+.submit{
+  font-size: 20px;
 }
 
 
-/////
-
-
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  -o-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-/* body {
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-size: 12px;
-  line-height: 30px;
-  color: #777;
-  background: #4CAF50;
-} */
-
-.container {
+/* .container {
   max-width: 400px;
   width: 100%;
   margin: 0 auto;
   position: relative;
-}
+} */

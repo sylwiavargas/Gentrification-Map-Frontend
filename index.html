@@ -8,16 +8,20 @@
 
   <body class="light">
 
-    <div id="navbar">
-      <button type="button" id="access"> Contrast 🌗</button>
+    <div class="top">
+      <div class="header">
+        <h1>Gentrification.<br>See for yourself. </h1>
+      </div>
+      <div class="check-it">
+              <button type="button" id="access" label="change contrast"> Contrast 🌗</button>
+      </div>
     </div>
 
-    <h1>Gentrification.<br>See for yourself. </h1>
 
     <div id="map-container">
       <div id="map"></div>
       <div id="toggles">
-        <h3>Check it:</h3>
+        <h2>Check it:</h2>
         <div id="buttonSection">
           <div id="shop-buttons">
             <button id="shops" style="font-size:25px; display:inline-block" data-id="2">New Coffee Shops</button>
@@ -35,7 +39,7 @@
           <div id ="section">
             <!-- here's the form -->
           </div>
-          <h4 id="cmHeadline"> Here's what others think: </h4>
+          <h3 id="cmHeadline"> Here's what others think: </h3>
           <ul>
             <!-- <li>This is cool!</li>
             <br>
@@ -44,10 +48,7 @@
         </div>
       </div>
     </div>
-    <div class="explanation">
-      <br>
-    "This is an example of explanation"
-    </div>
+
 
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAelUr6kBl9WauSQGBbp2lTeT63DWZT-AA&libraries=visualization&callback=initMap"></script>
     <script type="text/javascript" src="static/index.js"></script>
