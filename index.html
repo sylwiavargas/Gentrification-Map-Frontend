@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Heatmaps</title>
     <link rel="stylesheet" href="static/stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   </head>
   <body>
     <!-- <div id="floating-panel">
@@ -23,11 +24,20 @@
           <button onclick="changeOpacity(false)">Down</button>
       </div>
     </div> -->
-    <h1 style="margin-left:1%;">Welcome to My Heat Map</h1>
+    <h1 class="title" style="margin-left:1%;">Welcome to My Heat Map</h1>
     <div id="map-container">
       <div id="map"></div>
       <div id="toggles">
         <h3>Toggle:</h3>
+        <!-- <button type="button" id="dark">Dark Mode</button> -->
+        <div class="switch">
+          <label>
+            Off
+            <input id="checkMe" type="checkbox">
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
         <div id="shop-buttons">
           <button id="shops" style="font-size:25px;" data-id="2">New Coffee Shops: OFF</button>
           <br>
@@ -35,7 +45,7 @@
           <button id="shops-2018" class="year-button">2018</button>
           <div id="shops-expl" class="explanation">
                       <br>
-          "This is an example of explanation"
+
           </div>
         </div>
         <br>
@@ -47,13 +57,13 @@
           <button id="noises-2018" class="year-button">2018</button>
           <div id="noise-expl" class="explanation">
             <br>
-            "This is an example of explanation"
           </div>
         </div>
         <div id="comments">
-          <h4>Here is the comments area!</h4>
-          <div id="container">
-            <ul>
+
+            <ul class="collection with-header">
+
+
               <!-- <li>This is cool!</li>
               <br>
               <li>Nice map!</li> -->
@@ -61,12 +71,11 @@
           <div id ="section">
             <!-- here's the form -->
           </div>
-          </div>
         </div>
       </div>
     </div>
 
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV6TROSo_K6BDSnZMiA3JHX9mmjX65oOg&libraries=visualization&callback=initMap"></script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAelUr6kBl9WauSQGBbp2lTeT63DWZT-AA&libraries=visualization&callback=initMap"></script>
     <script type="text/javascript" src="static/index.js"></script>
   </body>
 </html>
