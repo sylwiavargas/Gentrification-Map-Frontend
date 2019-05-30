@@ -123,12 +123,12 @@ function initMap() {
   }
 }
 
-function dark() {
-  darkMode = false
-  initMap()
-}
-
-// dark()
+// function dark() {
+//   darkMode = false
+//   initMap()
+// }
+//
+// // dark()
 
 //////////////////////////////////SHOPS/////////////////////////////////////////
 
