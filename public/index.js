@@ -38,8 +38,16 @@ function addShopYearButtons(event) {
     // explanation.style.display = "block"
     commentHeadline.style.display = "block"
     showForm(event, shopId)
-  } else if (event.target.innerText === "✅ New Coffee Shops") {
-    hideForm()
+  } else if (event.target.innerText === "✅ New Coffee Shops" && noisesButton.innerText == "✅ Noise Complaints") {
+    shopsButton.innerText = "New Coffee Shops"
+    shops2010.style.display = "none"
+    shops2018.style.display = "none"
+    // explanation.style.display = "none"
+    // commentHeadline.style.display = "none"
+    shop2010Heatmap.setMap(null)
+    shop2018Heatmap.setMap(null)
+  } else {
+    hideForm();
     shopsButton.innerText = "New Coffee Shops"
     shops2010.style.display = "none"
     shops2018.style.display = "none"
@@ -121,8 +129,17 @@ function addNoiseYearButtons(event) {
     // explanation.style.display = "block"
     commentHeadline.style.display = "block"
     showForm(event, noiseId)
-  } else if (event.target.innerText === "✅ Noise Complaints") {
-    hideForm()
+    // fetchNoiseComments(event, noiseId)
+  } else if (event.target.innerText === "✅ Noise Complaints" && shopsButton.innerText == "✅ New Coffee Shops") {
+    noisesButton.innerText = "Noise Complaints"
+    noises2010.style.display = "none"
+    noises2018.style.display = "none"
+    // explanation.style.display = "none"
+    // commentHeadline.style.display = "none"
+    noise2010Heatmap.setMap(null)
+    noise2018Heatmap.setMap(null)
+  } else {
+    hideForm();
     noisesButton.innerText = "Noise Complaints"
     noises2010.style.display = "none"
     noises2018.style.display = "none"
