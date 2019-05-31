@@ -2,9 +2,38 @@ const maxI = 10, rad = 10, opac = .6;
 let map, shop2010Heatmap, shop2018Heatmap, noise2010Heatmap, noise2018Heatmap;
 
 let darkMode = false
-// const dark = document.getElementById("checkMe")
+let bigLettersMode = 1
+
 const body = document.querySelector('body');
 const darkModeBtn = document.querySelector("#access")
+const keyboardBtn = document.querySelector("#letters")
+// const fontBtn = document.querySelector("#font")
+
+// fontBtn.addEventListener('click', event => {
+//   if (body.classList.contains("readable")) {
+//     body.classList.remove("readable")
+//     body.classList.add("fancy")
+//   } else {
+//     body.classList.remove("fancy")
+//     body.classList.add("readable")
+//   }
+// });
+
+keyboardBtn.addEventListener('click', event => {
+  if (bigLettersMode == 3) {
+    bigLettersMode = 1
+    body.style.fontSize = "initial"
+    keyboardBtn.innerText = "Text 🔘🔘 "
+  } else if (bigLettersMode == 2) {
+    bigLettersMode = 3
+    body.style.fontSize = "larger"
+    keyboardBtn.innerText = "Text 🔵🔵 "
+  } else if (bigLettersMode == 1) {
+  bigLettersMode = 2
+  body.style.fontSize = "large"
+  keyboardBtn.innerText = "Text 🔵🔘 "
+}
+});
 
 darkModeBtn.addEventListener('click', event => {
   if (darkMode == true) {
@@ -19,25 +48,6 @@ darkModeBtn.addEventListener('click', event => {
     body.classList.remove("light")
   }
 });
-
-// dark.addEventListener('click', event => {
-//   if (dark.checked === false) {
-//     darkMode = false
-//     initMap()
-//     body.classList.add("light")
-//     body.classList.remove("dark")
-//   } else if (dark.checked === true) {
-//     darkMode = true
-//     initMap()
-//     body.classList.add("dark")
-//     body.classList.remove("light")
-//     console.log("dark");
-//   }
-// });
-
-
-// let darkMode = true
-
 
 function initMap() {
   if (darkMode == false) {

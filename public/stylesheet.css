@@ -12,13 +12,21 @@
 /* THEMES */
 
 .light {
-  background-color: #fff;
-  color: #151513;
+  background-color: white;
+  color: black;
 }
 
 .dark {
   background-color: #0e111d;
   color: #e3e1df;
+}
+
+.dark .explanation{
+color: #b4d3db;
+}
+
+.dark h1{
+color: #e3e1df;
 }
 
 /* GENERAL */
@@ -27,15 +35,41 @@ html, body {
   height: 100%;
   margin-left: 2%;
   padding: 0;
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: 'Helvetica', sans-serif;
 }
 
 #access {
-  font-size: 20px;
+  font-size: 1.25em;
   width: 150px;
+  height: 40px;
   float: right;
   margin-top: 25px;
   margin-right: 30px;
+}
+
+#letters {
+  font-size: 1.25em;
+  width: 150px;
+  height: 40px;
+  float: right;
+  margin-top: 25px;
+  margin-right: 30px;
+}
+
+#font {
+  font-size: 1.25em;
+  width: 150px;
+  height: 40px;
+  float: right;
+  margin-top: 25px;
+  margin-right: 30px;
+}
+
+
+:focus {
+    outline: 4px solid red;
+    background-color: #f59a9c;
+
 }
 
 /* BUTTONS */
@@ -60,7 +94,7 @@ button {
 /* TEXT */
 
 h1 {
-  font-size: 100px;
+  font-size: 6.25em;
   letter-spacing: -1px;
   line-height: 0.9;
   text-align: left;
@@ -70,16 +104,17 @@ h1 {
 }
 
 h2 {
-  font-size: 30px;
+  font-size: 1.875em;
 }
 
 #cmHeadline{
-  font-size: 20px;
+  margin-top: 30px;
+  font-size: 1.25em;
   display: none;
 }
 
 h3 {
-  font-size: 20px;
+  font-size: 1.25em;
   margin-top: 50px;
 }
 
@@ -89,45 +124,30 @@ h4{
 }
 
 
-/* a {
-  text-decoration: none;
-} */
-/*
-h1:hover {
-  color: #ff6600;
-  text-decoration: none;
+li{
+  font-size: 1.25em;
+  list-style-type: circle;
 }
 
-#switchy {
-  display: flex;
-  justify-content: flex-start;
-} */
-
-#switchy {
-  display: flex;
-  justify-content: flex-start;
-  background-color: black;
+input[type="submit"]{
+    margin-top: 10px;
+    background-color: #0e111d;
+    color: #fff;
+    border-radius: 10px;
 }
 
-#floating-panel {
-  display: flex;
-  position: absolute;
-  top: 10px;
-  left: 35%;
-  z-index: 5;
-  text-align: center;
-}
-.group {
-  border: 1px solid #999;
-  border-radius: 3px;
-  margin: 5px;
-  padding: 5px;
-  line-height: 25px;
-  background-color: white;
-  font-family: 'Roboto','sans-serif';
-  font-size: small;
+.explanation {
+  width: 59%;
+  font-size:1.4375em;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  line-height: 30px;
+  margin-left: 1%;
+  margin-top: 1%;
 }
 
+
+/* CONTAINERS */
 
 #toggles {
   margin-left: 3%;
@@ -141,10 +161,7 @@ h1:hover {
 .check-it{
   width: 30%;
   float: right;
-}
-
-.explanation {
-  font-size:25px;
+  display: block;
 }
 
 
@@ -160,17 +177,9 @@ h1:hover {
   height: 150px;
   border: 1px solid #0e111d;
   padding: 5px;
-  font-size: 20px;
+  font-size: 1.25em;
 }
 
 .submit{
-  font-size: 20px;
+  font-size: 1.25em;
 }
-
-
-/* .container {
-  max-width: 400px;
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
-} */
