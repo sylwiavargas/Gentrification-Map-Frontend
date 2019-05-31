@@ -7,17 +7,21 @@ let bigLettersMode = 1
 const body = document.querySelector('body');
 const darkModeBtn = document.querySelector("#access")
 const keyboardBtn = document.querySelector("#letters")
-// const fontBtn = document.querySelector("#font")
+const fontBtn = document.querySelector("#font")
 
-// fontBtn.addEventListener('click', event => {
-//   if (body.classList.contains("readable")) {
-//     body.classList.remove("readable")
-//     body.classList.add("fancy")
-//   } else {
-//     body.classList.remove("fancy")
-//     body.classList.add("readable")
-//   }
-// });
+fontBtn.addEventListener('click', event => {
+  if (body.classList.contains("readable")) {
+    console.log(body.classList)
+    body.classList.remove("readable")
+    body.classList.add("fancy")
+    console.log(body.classList)
+  } else {
+    console.log(body.classList)
+    body.classList.remove("fancy")
+    body.classList.add("readable")
+    console.log(body.classList)
+  }
+});
 
 keyboardBtn.addEventListener('click', event => {
   if (bigLettersMode == 3) {
