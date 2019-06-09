@@ -1,4 +1,3 @@
-const maxI = 10, rad = 10, opac = .6;
 let map, shop2010Heatmap, shop2018Heatmap, noise2010Heatmap, noise2018Heatmap;
 
 let darkMode = false
@@ -11,15 +10,11 @@ const fontBtn = document.querySelector("#font")
 
 fontBtn.addEventListener('click', event => {
   if (body.classList.contains("readable")) {
-    console.log(body.classList)
     body.classList.remove("readable")
     body.classList.add("fancy")
-    console.log(body.classList)
   } else {
-    console.log(body.classList)
     body.classList.remove("fancy")
     body.classList.add("readable")
-    console.log(body.classList)
   }
 });
 
@@ -210,7 +205,7 @@ function addShopYearButtons(event) {
 function addShop2010Heatmap(event) {
   if (event.target.innerText == "2010" && event.target.parentNode.id == "shop-buttons" && event.target.dataset.status == "inactive") {
 
-    fetch('http://localhost:5000/static/pawn_coffee2010.json')
+    fetch('pawn_coffee2010.json')
     .then(res => res.json())
     .then(result => {
       let locations = result.map((val) => {
@@ -233,8 +228,7 @@ function addShop2010Heatmap(event) {
 
 function addShop2018Heatmap(event) {
   if (event.target.innerText == "2018" && event.target.parentNode.id == "shop-buttons" && event.target.dataset.status == "inactive") {
-    console.log(event.target);
-    fetch('http://localhost:5000/static/pawn_coffee2018.json')
+    fetch('pawn_coffee2018.json')
     .then(res => res.json())
     .then(result => {
       let locations = result.map((val) => {
@@ -258,7 +252,6 @@ function addShop2018Heatmap(event) {
 
 const noisesButton = document.getElementById("noises")
 let noiseId = noisesButton.dataset.id
-// console.log(noiseId);
 noisesButton.addEventListener('click', addNoiseYearButtons)
 noisesButton.addEventListener('click', () => fetchNoiseComments(event, noiseId))
 
@@ -304,7 +297,7 @@ function addNoiseYearButtons(event) {
 
 function addNoise2010Heatmap(event) {
   if (event.target.innerText == "2010" && event.target.parentNode.id == "noise-buttons" && event.target.dataset.status == "inactive") {
-    fetch('static/noise2010.json')
+    fetch('noise2010.json')
     .then(res => res.json())
     .then(result => {
       let locations = result.map((val) => {
@@ -327,7 +320,7 @@ function addNoise2010Heatmap(event) {
 
 function addNoise2018Heatmap(event) {
   if (event.target.innerText == "2018" && event.target.parentNode.id == "noise-buttons" && event.target.dataset.status == "inactive") {
-    fetch('static/noise2018.json')
+    fetch('noise2018.json')
     .then(res => res.json())
     .then(result => {
       let locations = result.map((val) => {
@@ -352,7 +345,7 @@ function addNoise2018Heatmap(event) {
 
 function fetchShopComments(event, id) {
   if (shopsButton.innerText == "New Coffee Shops:") {
-    fetch(`http://localhost:3000/api/v1/categories/${id}`)
+    fetch(`https://gent-map-backend.herokuapp.com/api/v1/categories/${id}`)
       .then(response => response.json())
       .then(data => data.comments.forEach(slapItOnTheDiv))
   } else if (shopsButton.innerText == "New Coffee Shops") {
@@ -363,7 +356,7 @@ function fetchShopComments(event, id) {
 
 function fetchNoiseComments(event, id) {
   if (noisesButton.innerText == "Noise Complaints:") {
-    fetch(`http://localhost:3000/api/v1/categories/${id}`)
+    fetch(`https://gent-map-backend.herokuapp.com/api/v1/categories/${id}`)
       .then(response => response.json())
       .then(data => data.comments.forEach(slapItOnTheDiv))
   } else if (noisesButton.innerText == "Noise Complaints") {
@@ -383,7 +376,7 @@ function showForm(event, id) {
   const commentsContainer = document.querySelector('#section')
   const eForm = document.createElement('form')
   commentsContainer.innerHTML = ""
-  eForm.innerHTML = `<h3> What do you think about it? </h3> <input type="text" name="content" class="submissionfield" id="theComment" placeholder="please write your comment!">
+  eForm.innerHTML = `<h3> What do you think about it? </h3> <input type="text" name="content" class="submissionfield" id="theComment" placeholder="please tell us what you think">
       <br><input type="submit" name="submit" style="font-size: 20px;">`
   commentsContainer.append(eForm)
   eForm.addEventListener('submit', (event) => {
@@ -403,7 +396,7 @@ function addComment(event, id){
   if (comment == "") {
     alert("hey, write your comment!")
   } else {
-  return fetch('http://localhost:3000/api/v1/comments', {
+  return fetch('https://gent-map-backend.herokuapp.com/api/v1/comments', {
     method: "POST",
     headers: {
       'Content-Type': 'application/json',
