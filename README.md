@@ -27,6 +27,7 @@ $ npm install
 ```
 
 To run:
+Go to App.js and uncomment its contents
 
 ```
 $ npm start
