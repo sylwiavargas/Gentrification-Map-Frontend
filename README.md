@@ -2,7 +2,13 @@
 
 Gentrification Map allows us to see how two New York neighborhoods change. Bushwick is an already-gentrified neighborhood and Southeast Bronx is slowly being gentrified. Data from NYC OpenData allows us to see how many new cafes were open in 2010 vs 2018 and whether that correlates to noise complaints. The underlying assumption is that gentrifiers (usually white hipsters) call 311 on the long-time neighborhood residents. 
 
-Project was developed as Flatiron School's Mod 3 assignment in JavaScript. It runs on Node.js, vanilla JavaScript and Rails backend. It fetches maps from Google API, data from local .json files and data from local database. Although primarily the data was to be fetched directly from NYC OpenData, it turned out that the fetched files would be significantly larger and so the data was extracted into local .json.
+Explore:
+[Deployed version](https://gentrification-map.firebaseapp.com/) || [Backend repo](https://github.com/sylwiavargas/Gentrification-Heatmap-Backend)
+
+![](gentrification-map.gif)
+
+This project was developed as Flatiron School's Mod 3 assignment in JavaScript. It uses vanilla JavaScript for frontendand Rails backend. Maps are fetched from Google API, stat data from local .json files and data from local database. Although primarily the data was to be fetched directly from NYC OpenData, it turned out that the fetched files would be significantly larger and so the data was extracted into local .json.
+
 
 ## Getting Started
 
