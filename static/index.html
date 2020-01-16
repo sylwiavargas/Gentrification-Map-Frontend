@@ -14,13 +14,13 @@
       </div>
       <div class="check-it">
         <div>
-          <button type="button" id="access" label="change contrast"> Contrast 🌗</button>
+          <button type="button" id="access" label="change contrast" tabindex="3"> Contrast 🌗</button>
         </div>
         <div>
-          <button type="button" id="letters" label="increase letter size"> Text 🔘🔘 </button>
+          <button type="button" id="letters" label="increase letter size" tabindex="2"> Text 🔘🔘 </button>
         </div>
         <div>
-          <button type="button" id="font" label="change font"> Font 🔤 </button>
+          <button type="button" id="font" label="change font" tabindex="4"> Font 🔤 </button>
         </div>
       </div>
     </div>
@@ -32,9 +32,9 @@
         <h2>Check it:</h2>
         <div id="buttonSection">
           <div id="shop-buttons">
-            <button id="shops" style="font-size:25px; display:inline-block" data-id="2">New Coffee Shops</button>
-            <button id="shops-2010" class="year-button">2010</button>
-            <button id="shops-2018" class="year-button">2018</button>
+            <button id="shops" style="font-size:25px; display:inline-block" data-id="2" tabindex="4">New Coffee Shops</button>
+            <button id="shops-2010" class="year-button" tabindex="4">2010</button>
+            <button id="shops-2018" class="year-button" tabindex="4">2018</button>
           </div>
           <br>
           <div id="noise-buttons">
@@ -66,13 +66,9 @@
 
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAelUr6kBl9WauSQGBbp2lTeT63DWZT-AA&libraries=visualization&callback=initMap"></script>
     <script type="text/javascript" src="index.js"></script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
+
 <script src="/__/firebase/6.1.1/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#reserved-urls -->
-
-<!-- Initialize Firebase -->
 <script src="/__/firebase/init.js"></script>
   </body>
 </html>
